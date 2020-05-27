@@ -2,8 +2,8 @@
 #include <vector>
 #include <tuple>
 
-#include "inputoutput/parse_txt.h"
-#include "classes/maze/maze.h"
+#include "parse_txt.h"
+#include "../classes/maze/maze.h"
 #include <boost/range/algorithm_ext/erase.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/split.hpp>

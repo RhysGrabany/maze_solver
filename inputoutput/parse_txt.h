@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 
-#include "maze.h"
+#include "../classes/maze/maze.h"
 
 template<class T>
 void print_vector(std::vector<std::vector<T>> const ma);

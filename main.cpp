@@ -1,9 +1,8 @@
 #include <iostream>
 #include <fstream>
 
-#include "parse_txt.h"
-#include "maze.h"
-//#include <boost/algorithm/string.hpp>
+#include "inputoutput/parse_txt.h"
+#include "classes/maze/maze.h"
 
 int main(){
 
@@ -15,7 +14,7 @@ int main(){
     parse(in, maze);
     in.close();
 
-    maze.printMaze();
+
 
     return 0;
 }
