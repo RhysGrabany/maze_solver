@@ -14,7 +14,9 @@ int main(){
 
     parse(in, maze);
     in.close();
-    
+
+    maze.printMaze();
+
     return 0;
 }
 

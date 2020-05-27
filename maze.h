@@ -29,6 +29,8 @@ class Maze{
         std::tuple<int, int> getStart();
         std::tuple<int, int> getEnd();
 
+        void printMaze();
+
 };
 
 #endif

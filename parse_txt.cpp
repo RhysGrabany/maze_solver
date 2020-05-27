@@ -9,22 +9,6 @@
 #include <boost/algorithm/string/split.hpp>
 
 
-/*  
-    in: std::vector<std::vector<char>>
-    method for printing the 2d maze vector
-    takes in a 2d vector and prints each element 
-*/
-void print_vector(std::vector<std::vector<char>> const ma){
-
-    for(int i = 0; i < ma.size(); i++){
-        for(int j = 0; j < ma[i].size(); j++){
-            //std::cout << "[" << i << "|" << j << "]" << ma[i][j];
-            std::cout << ma[i][j];
-        }
-        std::cout << '\n';
-    }
-
-}
 
 /*  
     in: stream std::vector<std::vector<char>>

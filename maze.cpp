@@ -53,5 +53,28 @@ std::tuple<int, int> Maze::getEnd(){
     return end;
 }
 
+////////////////
+//   Methods  //
+////////////////
 
+
+
+/*  
+    in: std::vector<std::vector<char>>
+    method for printing the 2d maze vector
+    takes in a 2d vector and prints each element 
+*/
+void Maze::printMaze(){
+
+    std::vector<std::vector<char>> ma = mzp;
+
+    for(int i = 0; i < ma.size(); i++){
+        for(int j = 0; j < ma[i].size(); j++){
+            //std::cout << "[" << i << "|" << j << "]" << ma[i][j];
+            std::cout << ma[i][j];
+        }
+        std::cout << '\n';
+    }
+
+}
 
