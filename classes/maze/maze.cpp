@@ -16,6 +16,15 @@ Maze::Maze(std::vector<std::vector<char>> mz, std::tuple<int, int> s_coords, std
     end = e__coords;
 }
 
+Maze::Maze(std::vector<std::vector<char>> mz, std::tuple<int, int> s_coords, 
+    std::tuple<int, int> e__coords, std::vector<std::vector<char>> pa, bool so){
+    mzp = mz;
+    start = s_coords;
+    end = e__coords;
+    path = pa;
+    solved = so;
+}
+
 ///////////////////
 ///  Destructor ///
 ///////////////////
@@ -37,6 +46,14 @@ void Maze::setEnd(std::tuple<int, int> e_coords){
     end = e_coords;
 }
 
+void Maze::setPath(std::vector<std::vector<char>> pa){
+    path = pa;
+}
+
+void Maze::setSolved(bool so){
+    solved = so;
+}
+
 ///////////////
 //  Getters  //
 ///////////////
@@ -53,11 +70,19 @@ std::tuple<int, int> Maze::getEnd(){
     return end;
 }
 
+std::vector<std::vector<char>> Maze::getPath(){
+    return path;
+
+}
+
+bool Maze::getSolved(){
+    return solved;
+
+}
+
 ////////////////
 //   Methods  //
 ////////////////
-
-
 
 /*  
     in: std::vector<std::vector<char>>
@@ -75,6 +100,7 @@ void Maze::printMaze(){
         }
         std::cout << '\n';
     }
+
 
 }
 
