@@ -14,6 +14,6 @@ std::vector<std::vector<T>> maze_parse(std::istream& stream, std::vector<std::ve
 
 std::tuple<int, int> coords_parse(std::string unprse);
 
-void parse(std::istream& stream, Maze maze);
+void parse(std::istream& stream, Maze& maze);
 
 #endif

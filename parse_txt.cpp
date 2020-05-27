@@ -9,43 +9,56 @@
 #include <boost/algorithm/string/split.hpp>
 
 
-// method for printing the 2d maze vector
-template <class T>
+/*  
+    in: std::vector<std::vector<char>>
+    method for printing the 2d maze vector
+    takes in a 2d vector and prints each element 
+*/
 void print_vector(std::vector<std::vector<char>> const ma){
-    fflush(stdout);
 
-    for(std::vector<T> row: ma){
-        for(T val: row){
-            std::cout << val;
+    for(int i = 0; i < ma.size(); i++){
+        for(int j = 0; j < ma[i].size(); j++){
+            //std::cout << "[" << i << "|" << j << "]" << ma[i][j];
+            std::cout << ma[i][j];
         }
         std::cout << '\n';
     }
 
 }
 
-// parsing the maze data into a 2d vector
+/*  
+    in: stream std::vector<std::vector<char>>
+    out: std::vector<std::vector<char>>
+    parsing the maze data into a 2d vector
+    takes line in from stream and adds it to a 2d vector
+    returns a parsed 2d vector
+*/
 std::vector<std::vector<char>> maze_parse(std::istream& stream, std::vector<std::vector<char>> maze){
 
     std::string test;
-    stream.ignore();
+    //stream.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 
     int height = 0;
     while(std::getline(stream, test)){
-        std::vector<char> line;
-        
-        for (int i = 0; i < test.length(); i++){
-            line.push_back(test[i]);
+        if(!test.empty()){
+            
+            for (int i = 0; i < test.length(); i++){
+                maze[height][i] = test[i];
+            }
+            
+            height++;
         }
-        
-        maze.push_back(line);
-        height++;
     }
-
-    //print_vector(maze);
   
     return maze;
 }
 
+/*
+    in: string
+    out: std::tuple<int, int>
+    method for parsing the coords into an int tuple
+    accepts a string and returns a tuple with two ints for the coords
+*/
 std::tuple<int, int> coords_parse(std::string unprse){
 
     boost::remove_erase_if(unprse, boost::is_any_of("()"));
@@ -58,24 +71,37 @@ std::tuple<int, int> coords_parse(std::string unprse){
 }
 
 
-// Method for parsing in the data from the text file
-void parse(std::istream& stream, Maze maze){
+/* 
+    in: istream Maze
+    method for parsing in the data from the text file
+    goes through each line of the txt file and stores 
+    them as strings before moving on and parsing them into 
+    their respective data 
+
+    coords will be placed into tuples and maze will be placed into a 2d vector
+    all will be placed into a maze object
+*/
+void parse(std::istream& stream, Maze& maze){
 
     //height and width of the maze
     //start and end coords
-    int width, height;
+    std::string width, height;
     std::string start, end;
 
     //stream input the data
-    stream >> height >> width >> start >> end; 
-    //std::cout << height << std::endl << width << std::endl << start << std::endl << end << std::endl;
+    std::getline(stream, width);
+    std::getline(stream, height);
+    std::getline(stream, start);
+    std::getline(stream, end);
 
-    std::vector<std::vector<char>> mazeprs(width, std::vector<char> (height, 0));
-
-    std::vector<std::vector<char>> mz = maze_parse(stream, mazeprs);
-
-    print_vector(mz);
+    int wi = std::stoi(width);
+    int he = std::stoi(height);
 
 
+    std::vector<std::vector<char>> mazeprs(he, std::vector<char> (wi, 0));
+
+    maze.setMaze(maze_parse(stream, mazeprs));
+    maze.setStart(coords_parse(start));
+    maze.setEnd(coords_parse(end));
 
 }
