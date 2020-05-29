@@ -4,6 +4,7 @@
 #include "inputoutput/parse_txt.h"
 #include "classes/maze/maze.h"
 #include "algorithms/lefthand/lefthand.h"
+#include "algorithms/righthand/righthand.h"
 
 int main(){
 
@@ -15,7 +16,7 @@ int main(){
     parse(in, maze);
     in.close();
 
-    lefthand(maze);
+    righthand(maze);
 
     return 0;
 }

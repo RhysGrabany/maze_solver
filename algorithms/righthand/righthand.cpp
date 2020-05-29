@@ -1,5 +1,5 @@
 
-#include "lefthand.h"
+#include "righthand.h"
 #include "../../classes/maze/maze.h"
 
 #include <vector>
@@ -8,16 +8,16 @@
 
 
 /*
-    This is a recursive method for the lefthand algorithm (keeps the wall
-    to the left hand side; moving right top-down mode)
+    This is a recursive method for the righthand algorithm (keeps the wall
+    to the right hand side; moving left top-down mode)
     Checks each direction before moving on and will call itself 
     until the end point is reached
-    Order of precedence is: Up > Right > Down > Left
+    Order of precedence is: Up > Left > Down > Right
     
     in: std::tuple<int,int> pos, std::tuple<int,int> end, std::vector<std::vector<char>> maze
     out: std::vector<std::vector<char>> maze
 */
-std::vector<std::vector<char>> solve_recurL(std::tuple<int, int> pos, std::tuple<int, int> end, 
+std::vector<std::vector<char>> solve_recurR(std::tuple<int, int> pos, std::tuple<int, int> end, 
     std::vector<std::vector<char>> maze){
 
 
@@ -32,44 +32,44 @@ std::vector<std::vector<char>> solve_recurL(std::tuple<int, int> pos, std::tuple
             maze[yp][xp] = '*';
         } 
 
-        if((yp-1 > 0) && (maze[yp-1][xp] == ' ')) {
-            std::get<1>(pos) -= 1;
-            maze[yp-1][xp] = '*';
-            maze = solve_recurL(pos, end, maze);
-
-        } else if((xp+1 < maze[yp].size()) && (maze[yp][xp+1] == ' ')) {
-            std::get<0>(pos) += 1;
-            maze[yp][xp+1] = '*';
-            maze = solve_recurL(pos, end, maze);
+        if((xp-1 > 0) && (maze[yp][xp-1] == ' ')) {
+            std::get<0>(pos) -= 1;
+            maze[yp][xp-1] = '*';
+            maze = solve_recurR(pos, end, maze);
 
         } else if((yp+1 < maze.size()) && (maze[yp+1][xp] == ' ')) {
             std::get<1>(pos) += 1;
             maze[yp+1][xp] = '*';
-            maze = solve_recurL(pos, end, maze);
-
-        } else if((xp-1 > 0) && (maze[yp][xp-1] == ' ')) {
-            std::get<0>(pos) -= 1;
-            maze[yp][xp-1] = '*';
-            maze = solve_recurL(pos, end, maze);
-
+            maze = solve_recurR(pos, end, maze);
+        
+        } else if((yp-1 > 0) && (maze[yp-1][xp] == ' ')) {
+            std::get<1>(pos) -= 1;
+            maze[yp-1][xp] = '*';
+            maze = solve_recurR(pos, end, maze);
+        
+        } else if((xp+1 < maze[yp].size()) && (maze[yp][xp+1] == ' ')) {
+            std::get<0>(pos) += 1;
+            maze[yp][xp+1] = '*';
+            maze = solve_recurR(pos, end, maze);
         }
+
 
         return maze;
 
 }
 
 /*
-    This is an iterative method for the lefthand algorithm (keeps the wall
-    to the left hand side; moving right top-down mode)
+    This is an iterative method for the righthand algorithm (keeps the wall
+    to the right hand side; moving left top-down mode)
     Checks each direction before moving on and will call itself 
     until the end point is reached
-    Order of precedence is: Up > Right > Down > Left
+    Order of precedence is: Down > Left > Up > Right
     
     in: std::tuple<int,int> pos, std::tuple<int,int> end, std::vector<std::vector<char>> maze
     out: std::vector<std::vector<char>> maze
 */
 
-std::vector<std::vector<char>> solve_iterL(std::tuple<int, int> pos, std::tuple<int, int> end, 
+std::vector<std::vector<char>> solve_iterR(std::tuple<int, int> pos, std::tuple<int, int> end, 
     std::vector<std::vector<char>> maze){
 
 
@@ -81,15 +81,10 @@ std::vector<std::vector<char>> solve_iterL(std::tuple<int, int> pos, std::tuple<
             if(maze[yp][xp] == ' '){
                 maze[yp][xp] = '*';
             } 
-
-            if((yp-1 > 0) && (maze[yp-1][xp] == ' ')) {
-                std::get<1>(pos) -= 1;
-                maze[yp-1][xp] = '*';
-                continue;
-
-            } else if((xp+1 < maze[yp].size()) && (maze[yp][xp+1] == ' ')) {
-                std::get<0>(pos) += 1;
-                maze[yp][xp+1] = '*';
+            
+            if((xp-1 > 0) && (maze[yp][xp-1] == ' ')) {
+                std::get<0>(pos) -= 1;
+                maze[yp][xp-1] = '*';
                 continue;
 
             } else if((yp+1 < maze.size()) && (maze[yp+1][xp] == ' ')) {
@@ -97,9 +92,14 @@ std::vector<std::vector<char>> solve_iterL(std::tuple<int, int> pos, std::tuple<
                 maze[yp+1][xp] = '*';
                 continue;
 
-            } else if((xp-1 > 0) && (maze[yp][xp-1] == ' ')) {
-                std::get<0>(pos) -= 1;
-                maze[yp][xp-1] = '*';
+            } else if((yp-1 > 0) && (maze[yp-1][xp] == ' ')) {
+                std::get<1>(pos) -= 1;
+                maze[yp-1][xp] = '*';
+                continue;
+            
+            } else if((xp+1 < maze[yp].size()) && (maze[yp][xp+1] == ' ')) {
+                std::get<0>(pos) += 1;
+                maze[yp][xp+1] = '*';
                 continue;
             }
 
@@ -111,7 +111,7 @@ std::vector<std::vector<char>> solve_iterL(std::tuple<int, int> pos, std::tuple<
 }
 
 
-void lefthand(Maze &ma){
+void righthand(Maze &ma){
 
     std::tuple<int, int> start = ma.getStart();
     std::tuple<int, int> end = ma.getEnd();
@@ -120,7 +120,7 @@ void lefthand(Maze &ma){
     int xe = std::get<0>(end);
     int ye = std::get<1>(end);
 
-    maze = solve_recurL(start, end, maze);
+    maze = solve_recurR(start, end, maze);
 
     if(maze[ye][xe] == '*'){
         ma.setSolved(true);
