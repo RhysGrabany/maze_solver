@@ -38,6 +38,7 @@ class Maze{
 
 
         void printMaze();
+        void printPath();
 
 };
 
