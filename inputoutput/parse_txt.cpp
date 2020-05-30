@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <tuple>
+#include <utility>
 
 #include "parse_txt.h"
 #include "../classes/maze/maze.h"
@@ -39,18 +39,18 @@ std::vector<std::vector<char>> maze_parse(std::istream& stream, std::vector<std:
 
 /*
     in: string
-    out: std::tuple<int, int>
-    method for parsing the coords into an int tuple
-    accepts a string and returns a tuple with two ints for the coords
+    out: std::pair<int, int>
+    method for parsing the coords into an int pair
+    accepts a string and returns a pair with two ints for the coords
 */
-std::tuple<int, int> coords_parse(std::string unprse){
+std::pair<int, int> coords_parse(std::string unprse){
 
     boost::remove_erase_if(unprse, boost::is_any_of("()"));
     
     std::vector<std::string> str;
     boost::split(str, unprse, boost::is_any_of(","));
 
-    return std::make_tuple(std::stoi(str[0]), std::stoi(str[1]));
+    return std::make_pair(std::stoi(str[0]), std::stoi(str[1]));
 
 }
 
@@ -62,7 +62,7 @@ std::tuple<int, int> coords_parse(std::string unprse){
     them as strings before moving on and parsing them into 
     their respective data 
 
-    coords will be placed into tuples and maze will be placed into a 2d vector
+    coords will be placed into pairs and maze will be placed into a 2d vector
     all will be placed into a maze object
 */
 void parse(std::istream& stream, Maze& maze){

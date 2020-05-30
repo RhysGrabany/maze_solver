@@ -4,6 +4,7 @@
 #include <iostream>
 #include <tuple>
 #include <vector>
+#include <utility>
 
 /*
     Class for Maze object
@@ -15,24 +16,24 @@ class Maze{
 
     private: // private values that must be changed through setters
         std::vector<std::vector<char>> mzp, path;
-        std::tuple<int, int> start, end;        
+        std::pair<int, int> start, end;        
         bool solved = false;
 
     public: // public methods: constructors, destructor, getters and setters
         Maze();
-        Maze(std::vector<std::vector<char>> mz, std::tuple<int, int> s_coords, std::tuple<int, int> e__coords);
-        Maze(std::vector<std::vector<char>> mz, std::tuple<int, int> s_coords, std::tuple<int, int> e__coords, std::vector<std::vector<char>> pa, bool so);
+        Maze(std::vector<std::vector<char>> mz, std::pair<int, int> s_coords, std::pair<int, int> e__coords);
+        Maze(std::vector<std::vector<char>> mz, std::pair<int, int> s_coords, std::pair<int, int> e__coords, std::vector<std::vector<char>> pa, bool so);
         ~Maze();
 
         void setMaze(std::vector<std::vector<char>> mz);
-        void setStart(std::tuple<int, int> s_coords);
-        void setEnd(std::tuple<int, int> e_coords);
+        void setStart(std::pair<int, int> s_coords);
+        void setEnd(std::pair<int, int> e_coords);
         void setPath(std::vector<std::vector<char>> pa);
         void setSolved(bool s);
 
         std::vector<std::vector<char>> getMaze();
-        std::tuple<int, int> getStart();
-        std::tuple<int, int> getEnd();
+        std::pair<int, int> getStart();
+        std::pair<int, int> getEnd();
         std::vector<std::vector<char>> getPath();
         bool getSolved();
 

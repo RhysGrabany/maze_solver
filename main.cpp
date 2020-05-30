@@ -16,7 +16,7 @@ int main(){
     parse(in, maze);
     in.close();
 
-    righthand(maze);
+    lefthand(maze);
 
     return 0;
 }
