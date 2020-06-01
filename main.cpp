@@ -3,8 +3,11 @@
 
 #include "inputoutput/parse_txt.h"
 #include "classes/maze/maze.h"
+
 #include "algorithms/lefthand/lefthand.h"
 #include "algorithms/righthand/righthand.h"
+#include "algorithms/floodfill/floodfill.h"
+
 
 int main(){
 
@@ -16,7 +19,8 @@ int main(){
     parse(in, maze);
     in.close();
 
-    lefthand(maze);
+    floodfill(maze);
+    //lefthand(maze);
 
     return 0;
 }
