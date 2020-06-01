@@ -20,7 +20,6 @@
 std::vector<std::vector<char>> maze_parse(std::istream& stream, std::vector<std::vector<char>> maze){
 
     std::string test;
-    //stream.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 
     int height = 0;
     while(std::getline(stream, test)){
