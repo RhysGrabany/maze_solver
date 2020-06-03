@@ -32,27 +32,24 @@ std::vector<std::vector<char>> solve_recurL(std::pair<int, int> pos, std::pair<i
             maze[yp][xp] = '*';
         } 
 
-        if((yp-1 > 0) && (maze[yp-1][xp] == ' ')) {
-            pos.second -= 1;
-            maze[yp-1][xp] = '*';
-            maze = solve_recurL(pos, end, maze);
-
-        } else if((xp+1 < maze[yp].size()) && (maze[yp][xp+1] == ' ')) {
+        if((xp+1 < maze[yp].size()) && (maze[yp][xp+1] == ' ')) {
             pos.first += 1;
             maze[yp][xp+1] = '*';
             maze = solve_recurL(pos, end, maze);
-
         } else if((yp+1 < maze.size()) && (maze[yp+1][xp] == ' ')) {
             pos.second += 1;
             maze[yp+1][xp] = '*';
             maze = solve_recurL(pos, end, maze);
-
         } else if((xp-1 > 0) && (maze[yp][xp-1] == ' ')) {
             pos.first -= 1;
             maze[yp][xp-1] = '*';
             maze = solve_recurL(pos, end, maze);
-
+        } else if((yp-1 > 0) && (maze[yp-1][xp] == ' ')) {
+            pos.second -= 1;
+            maze[yp-1][xp] = '*';
+            maze = solve_recurL(pos, end, maze);
         }
+
 
         return maze;
 
@@ -82,24 +79,26 @@ std::vector<std::vector<char>> solve_iterL(std::pair<int, int> pos, std::pair<in
                 maze[yp][xp] = '*';
             } 
 
-            if((yp-1 > 0) && (maze[yp-1][xp] == ' ')) {
-                pos.second -= 1;
-                maze[yp-1][xp] = '*';
-                continue;
-
-            } else if((xp+1 < maze[yp].size()) && (maze[yp][xp+1] == ' ')) {
+            if((xp+1 < maze[yp].size()) && (maze[yp][xp+1] == ' ')) {
+                
                 pos.first += 1;
                 maze[yp][xp+1] = '*';
                 continue;
-
             } else if((yp+1 < maze.size()) && (maze[yp+1][xp] == ' ')) {
+                
                 pos.second += 1;
                 maze[yp+1][xp] = '*';
                 continue;
-
             } else if((xp-1 > 0) && (maze[yp][xp-1] == ' ')) {
+                
                 pos.first -= 1;
                 maze[yp][xp-1] = '*';
+                continue;
+
+            } else if((yp-1 > 0) && (maze[yp-1][xp] == ' ')) {
+                
+                pos.second -= 1;
+                maze[yp-1][xp] = '*';
                 continue;
             }
 
@@ -113,26 +112,23 @@ std::vector<std::vector<char>> solve_iterL(std::pair<int, int> pos, std::pair<in
 
 void lefthand(Maze &ma){
 
+    std::cout << "Lefthand Algorithm\n\n";
+
     std::pair<int, int> start = ma.getStart();
     std::pair<int, int> end = ma.getEnd();
     std::vector<std::vector<char>> maze = ma.getMaze();
 
-    maze = solve_recurL(start, end, maze);
+    maze = solve_iterL(start, end, maze);
 
     if(maze[end.second][end.first] == '*'){
         ma.setSolved(true);
+        std::cout << "---Maze is solved!---\n";
     } else {
-        ma.setSolved(false);
+        std::cout << "-Maze is not solved!-\n";
     }
 
     ma.setPath(maze);
     ma.printPath();
-
-    if(ma.getSolved()){
-        std::cout << "Maze has been solved!\n";
-    } else {
-        std::cout << "Maze couldn't be solved!\n";
-    }
 
 
 }

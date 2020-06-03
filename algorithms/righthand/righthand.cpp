@@ -113,6 +113,8 @@ std::vector<std::vector<char>> solve_iterR(std::pair<int, int> pos, std::pair<in
 
 void righthand(Maze &ma){
 
+    std::cout << "Righthand Algorithm\n\n";
+
     std::pair<int, int> start = ma.getStart();
     std::pair<int, int> end = ma.getEnd();
     std::vector<std::vector<char>> maze = ma.getMaze();
@@ -121,19 +123,13 @@ void righthand(Maze &ma){
 
     if(maze[end.second][end.first] == '*'){
         ma.setSolved(true);
+        std::cout << "---Maze is solved!---\n";
     } else {
-        ma.setSolved(false);
+        std::cout << "-Maze is not solved!-\n";
     }
 
     ma.setPath(maze);
     ma.printPath();
-
-    if(ma.getSolved()){
-        std::cout << "Maze has been solved!\n";
-    } else {
-        std::cout << "Maze couldn't be solved!\n";
-    }
-
 
 }
 

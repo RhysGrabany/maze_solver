@@ -17,7 +17,6 @@ std::vector<std::vector<bool>> vis_vec(std::vector<std::vector<char>> maze){
     }
 
     return visited;
-
 }
 
 int junction(std::pair<int, int> pos, std::vector<std::vector<char>> maze, std::vector<std::vector<bool>> vis){
@@ -26,7 +25,6 @@ int junction(std::pair<int, int> pos, std::vector<std::vector<char>> maze, std::
     int yp = pos.second;
 
     int juncs = 0;
-
 
     if((yp-1 > 0) && ((maze[yp-1][xp] == ' ') && (vis[yp-1][xp] == false))) {
         juncs+=1;
@@ -42,31 +40,11 @@ int junction(std::pair<int, int> pos, std::vector<std::vector<char>> maze, std::
     }
 
     return juncs;
-
 }
-
-// Print the current pair 
-void printPair(std::pair<int, int> p){ 
-  
-    std::cout << "(" << p.first << ", " << p.second << ") "; 
-} 
-  
-// Print the Stack of Pairs 
-void showstack(std::stack<std::pair<int, int>> s){
-    
-    while (!s.empty()) { 
-        printPair(s.top()); 
-        s.pop(); 
-    } 
-  
-    std::cout << '\n'; 
-} 
-
 
 std::stack<std::pair<int, int>> path_del(std::stack<std::pair<int,int>> path, 
     std::stack<std::pair<int,int>> junctions){
 
-    std::cout << "Deleting path\n";
     while(path.top() != junctions.top()){
         path.pop();
     }
@@ -83,14 +61,10 @@ std::vector<std::vector<char>> plot_maze(std::vector<std::vector<char>> maze,
             int y = path.top().second;
 
             maze[y][x] = '*';
-
             path.pop();
-
         }
 
         return maze;
-
-
     }
 
 
@@ -103,11 +77,7 @@ std::stack<std::pair<int,int>> solve(std::pair<int, int> pos, std::pair<int, int
         std::stack<std::pair<int,int>> path;
         std::stack<std::pair<int,int>> junctions;
 
-        int loop = 0;
-
         while(pos != end){
-            printf("Curr Coords: (%i, %i)\n", pos.first, pos.second);
-
             int juncs = junction(pos, maze, visited);
 
             if(juncs > 1){
@@ -148,18 +118,15 @@ std::stack<std::pair<int,int>> solve(std::pair<int, int> pos, std::pair<int, int
             } else {
 
                 if(junctions.empty()){
+                    
                     return path;
-                
                 } else {
+
                     pos = junctions.top();
-                    junctions.pop();
                     path = path_del(path, junctions);
+                    junctions.pop();
                 }
-
             }
-
-            loop++;
-
         }
 
         return path;
@@ -169,30 +136,29 @@ std::stack<std::pair<int,int>> solve(std::pair<int, int> pos, std::pair<int, int
 
 void floodfill(Maze &ma){
 
-    std::cout << "Floodfill Algorithm\n";
+    std::cout << "Floodfill Algorithm\n\n";
 
     std::pair<int, int> start = ma.getStart();
     std::pair<int, int> end = ma.getEnd();
     std::vector<std::vector<char>> maze = ma.getMaze();
-
-    //std::cout << start.second << " " << start.first << std::endl;
 
     std::stack<std::pair<int,int>> path;
 
 
     path = solve(start, end, maze);
 
+    if(path.top() == end){
+        ma.setSolved(true);
+        std::cout << "---Maze is solved!---\n";
+    } else {
+        std::cout << "-Maze is not solved!-\n";
+    }
+
     maze = plot_maze(maze, path);
 
-    //showstack(path);
-
-    std::cout << std::endl;
-    ma.printMaze();
     std::cout << std::endl;
 
     ma.setPath(maze);
     ma.printPath();
-
-
 
 }

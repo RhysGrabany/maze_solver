@@ -16,7 +16,7 @@ class Maze{
 
     private: // private values that must be changed through setters
         std::vector<std::vector<char>> mzp, path;
-        std::pair<int, int> start, end;        
+        std::pair<int, int> start, end;
         bool solved = false;
 
     public: // public methods: constructors, destructor, getters and setters

@@ -100,6 +100,7 @@ void Maze::printMaze(){
         }
         std::cout << '\n';
     }
+    std::cout << "\n";
 }
 
 void Maze::printPath(){
@@ -113,7 +114,7 @@ void Maze::printPath(){
         }
         std::cout << '\n';
     }
-
+    std::cout << "\n";
 
 }
 
