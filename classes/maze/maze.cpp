@@ -95,8 +95,8 @@ void Maze::printMaze(){
 
     for(int i = 0; i < ma.size(); i++){
         for(int j = 0; j < ma[i].size(); j++){
-            //std::cout << "[" << i << "|" << j << "]" << ma[i][j];
-            std::cout << ma[i][j];
+            std::cout << "[" << i << "|" << j << "]" << ma[i][j];
+            //std::cout << ma[i][j];
         }
         std::cout << '\n';
     }
