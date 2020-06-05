@@ -24,7 +24,7 @@ int menu(){
 int main(){
 
     std::ifstream in;
-    in.open("mazes/example.txt");
+    in.open("mazes/example2.txt");
 
     Maze maze;
 

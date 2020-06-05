@@ -5,16 +5,6 @@
 #include <stack>
 
 /*
-    in: std::vector<std::vector<char>> maze
-    This method basically makes a copy of the normal maze but instead of char, it is a bool type
-    Every element in the vector is false because it hasn't been visited yet as default
-    returns the new 2d vector
-    out: std::vector<std::vector<bool>> visted
-
-*/
-std::vector<std::vector<bool>> vis_vec(std::vector<std::vector<char>> maze);
-
-/*
     in: std::pair<int, int> pos, std::vector<std::vector<char>> maze, std::vector<std::vector<bool>> vis
     Takes in the currect position on the maze and checks each direction around it
     each potential route is added to a counter for how may junction paths is possible

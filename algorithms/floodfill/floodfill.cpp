@@ -6,19 +6,6 @@
 #include <stack>
 #include <utility>
 
-std::vector<std::vector<bool>> vis_vec(std::vector<std::vector<char>> maze){
-
-    std::vector<std::vector<bool>> visited(maze.size(), std::vector<bool>(maze[0].size(), 0));
-
-    for(int i = 0; i < maze.size(); i++){
-        for(int j = 0; j < maze[i].size(); j++){
-            visited[i][j] = false;
-        }
-    }
-
-    return visited;
-}
-
 int junction(std::pair<int, int> pos, std::vector<std::vector<char>> maze, std::vector<std::vector<bool>> vis){
 
     int xp = pos.first;
@@ -72,7 +59,8 @@ std::vector<std::vector<char>> plot_maze(std::vector<std::vector<char>> maze,
 std::stack<std::pair<int,int>> solve(std::pair<int, int> pos, std::pair<int, int> end,
     std::vector<std::vector<char>> maze){
 
-        std::vector<std::vector<bool>> visited = vis_vec(maze);
+        std::vector<std::vector<bool>> visited(maze.size(), std::vector<bool>(maze[0].size(), false));
+
         
         std::stack<std::pair<int,int>> path;
         std::stack<std::pair<int,int>> junctions;
@@ -118,7 +106,6 @@ std::stack<std::pair<int,int>> solve(std::pair<int, int> pos, std::pair<int, int
             } else {
 
                 if(junctions.empty()){
-                    
                     return path;
                 } else {
 
