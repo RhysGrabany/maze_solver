@@ -1,33 +1,43 @@
 #include "output.h"
 
+#include <iostream>
+#include <fstream>
 #include <vector>
 #include <experimental/filesystem>
 
 namespace fs = std::experimental::filesystem;
 
-
-
 void makeFolder(){
 
     std::string folder = "outputs";
-
 
     if(!fs::is_directory(folder)){
         fs::create_directory(folder);
     }
 
+}
+
+void writeTo(std::vector<std::vector<char>> maze_path){
+
+    std::ofstream outfile;
+    outfile.open("outputs/output.txt");
+
+
+    for(int i = 0; i < maze_path.size(); i++){
+        for(int j = 0; j < maze_path[i].size(); j++){
+            outfile << maze_path[i][j];
+        }
+        outfile << "\n";
+    }
+
+    outfile.close();
 
 }
 
-void writeTo(){
-
-    
-
-}
-
-void out(std::vector<std::vector<char>> mazePath){
+void out(std::vector<std::vector<char>> maze_path){
 
     makeFolder();
+    writeTo(maze_path);
 
 
 }

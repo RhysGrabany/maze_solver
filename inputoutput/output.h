@@ -4,6 +4,6 @@
 
 void makeFolder();
 
-void writeTo();
+void writeTo(std::vector<std::vector<char>> maze_path);
 
-void out(std::vector<std::vector<char>> mazePath);
+void out(std::vector<std::vector<char>> maze_path);
