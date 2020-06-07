@@ -45,6 +45,6 @@ std::stack<std::pair<int,int>> solve(std::pair<int, int> pos, std::pair<int, int
     This is the main method of this algo
     The goal of this algo is to test every possible junction looking for the exit
 */
-void floodfill(Maze &ma);
+void floodfill(Maze *ma);
 
 #endif

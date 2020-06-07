@@ -11,7 +11,7 @@ std::vector<std::vector<char>> solve_iterR(std::tuple<int, int> pos, std::tuple<
 std::vector<std::vector<char>> solve_recurR(std::tuple<int, int> pos, std::tuple<int, int> end, 
     std::vector<std::vector<char>> maze);
 
-void righthand(Maze &ma);
+void righthand(Maze *ma);
 
 
 

@@ -110,25 +110,25 @@ std::vector<std::vector<char>> solve_iterL(std::pair<int, int> pos, std::pair<in
 }
 
 
-void lefthand(Maze &ma){
+void lefthand(Maze *ma){
 
     std::cout << "Lefthand Algorithm\n\n";
 
-    std::pair<int, int> start = ma.getStart();
-    std::pair<int, int> end = ma.getEnd();
-    std::vector<std::vector<char>> maze = ma.getMaze();
+    std::pair<int, int> start = ma->getStart();
+    std::pair<int, int> end = ma->getEnd();
+    std::vector<std::vector<char>> maze = ma->getMaze();
 
     maze = solve_iterL(start, end, maze);
 
     if(maze[end.second][end.first] == '*'){
-        ma.setSolved(true);
+        ma->setSolved(true);
         std::cout << "---Maze is solved!---\n";
     } else {
         std::cout << "-Maze is not solved!-\n";
     }
 
-    ma.setPath(maze);
-    ma.printPath();
+    ma->setPath(maze);
+    ma->printPath();
 
 
 }

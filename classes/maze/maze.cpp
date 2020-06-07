@@ -11,18 +11,25 @@
 Maze::Maze(){};
 
 Maze::Maze(std::vector<std::vector<char>> mz, std::pair<int, int> s_coords, std::pair<int, int> e__coords){
-    mzp = mz;
-    start = s_coords;
-    end = e__coords;
+    m_Maze = mz;
+    m_Start = s_coords;
+    m_End = e__coords;
 }
 
-Maze::Maze(std::vector<std::vector<char>> mz, std::pair<int, int> s_coords, 
+/*Maze::Maze(std::vector<std::vector<char>> mz, std::pair<int, int> s_coords, 
     std::pair<int, int> e__coords, std::vector<std::vector<char>> pa, bool so){
-    mzp = mz;
+    m = mz;
     start = s_coords;
     end = e__coords;
     path = pa;
     solved = so;
+}*/
+
+Maze::Maze(const Maze &maze){
+    m_Maze = maze.m_Maze;
+    m_Start = maze.m_Start;
+    m_End = maze.m_End;
+
 }
 
 ///////////////////
@@ -35,23 +42,23 @@ Maze::~Maze(){};
 ///////////////
 
 void Maze::setMaze(std::vector<std::vector<char>> mz){
-    mzp = mz;
+    m_Maze = mz;
 }
 
 void Maze::setStart(std::pair<int, int> s_coords){
-    start = s_coords;
+    m_Start = s_coords;
 }
 
 void Maze::setEnd(std::pair<int, int> e_coords){
-    end = e_coords;
+    m_End = e_coords;
 }
 
 void Maze::setPath(std::vector<std::vector<char>> pa){
-    path = pa;
+    m_Path = pa;
 }
 
 void Maze::setSolved(bool so){
-    solved = so;
+    m_Solved = so;
 }
 
 ///////////////
@@ -59,24 +66,24 @@ void Maze::setSolved(bool so){
 ///////////////
 
 std::vector<std::vector<char>> Maze::getMaze(){
-    return mzp;
+    return m_Maze;
 }
 
 std::pair<int, int> Maze::getStart(){
-    return start;
+    return m_Start;
 }
 
 std::pair<int, int> Maze::getEnd(){
-    return end;
+    return m_End;
 }
 
 std::vector<std::vector<char>> Maze::getPath(){
-    return path;
+    return m_Path;
 
 }
 
 bool Maze::getSolved(){
-    return solved;
+    return m_Solved;
 
 }
 
@@ -91,7 +98,7 @@ bool Maze::getSolved(){
 */
 void Maze::printMaze(){
 
-    std::vector<std::vector<char>> ma = mzp;
+    std::vector<std::vector<char>> ma = m_Maze;
 
     for(int i = 0; i < ma.size(); i++){
         for(int j = 0; j < ma[i].size(); j++){
@@ -105,7 +112,7 @@ void Maze::printMaze(){
 
 void Maze::printPath(){
 
-    std::vector<std::vector<char>> ma = path;
+    std::vector<std::vector<char>> ma = m_Path;
 
     for(int i = 0; i < ma.size(); i++){
         for(int j = 0; j < ma[i].size(); j++){

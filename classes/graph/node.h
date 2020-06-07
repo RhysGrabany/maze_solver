@@ -8,7 +8,7 @@
 class Node{
 
     private:
-        int vertice;
+        int vertice = 0;
         std::pair<int,int> coord;
     public:
         Node();

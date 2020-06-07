@@ -54,6 +54,25 @@ std::pair<int, int> coords_parse(std::string unprse){
 }
 
 
+std::vector<std::pair<int,int>> find_coord(std::vector<std::vector<char>> maze){
+
+    std::vector<std::pair<int, int>> coords;
+
+    for(int i = 0; i < maze.size(); i++){
+        for(int j = 0; j < maze[i].size(); j++){
+            if(maze[i][j] == ' '){
+                coords.push_back(std::make_pair(j, i));
+                i = maze.size()-1;
+            }
+
+        }
+    }
+
+    return coords;
+
+}
+
+
 /* 
     in: istream Maze
     method for parsing in the data from the text file
@@ -64,18 +83,15 @@ std::pair<int, int> coords_parse(std::string unprse){
     coords will be placed into pairs and maze will be placed into a 2d vector
     all will be placed into a maze object
 */
-void parse(std::istream& stream, Maze& maze){
+void parse(std::istream& stream, Maze *maze){
 
     //height and width of the maze
     //start and end coords
     std::string width, height;
-    std::string start, end;
 
     //stream input the data
     std::getline(stream, width);
     std::getline(stream, height);
-    std::getline(stream, start);
-    std::getline(stream, end);
 
     int wi = std::stoi(width);
     int he = std::stoi(height);
@@ -83,8 +99,14 @@ void parse(std::istream& stream, Maze& maze){
 
     std::vector<std::vector<char>> mazeprs(he, std::vector<char> (wi, 0));
 
-    maze.setMaze(maze_parse(stream, mazeprs));
-    maze.setStart(coords_parse(start));
-    maze.setEnd(coords_parse(end));
+    maze->setMaze(maze_parse(stream, mazeprs));
+
+    std::vector<std::vector<char>> ma = maze->getMaze();
+    std::vector<std::pair<int,int>> coords = find_coord(ma);
+
+    std::cout << coords.size() << "\n";
+
+    maze->setStart(coords[0]);
+    maze->setEnd(coords[1]);
 
 }

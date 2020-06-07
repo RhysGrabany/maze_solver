@@ -121,13 +121,13 @@ std::stack<std::pair<int,int>> solve(std::pair<int, int> pos, std::pair<int, int
 }
 
 
-void floodfill(Maze &ma){
+void floodfill(Maze *ma){
 
     std::cout << "Floodfill Algorithm\n\n";
 
-    std::pair<int, int> start = ma.getStart();
-    std::pair<int, int> end = ma.getEnd();
-    std::vector<std::vector<char>> maze = ma.getMaze();
+    std::pair<int, int> start = ma->getStart();
+    std::pair<int, int> end = ma->getEnd();
+    std::vector<std::vector<char>> maze = ma->getMaze();
 
     std::stack<std::pair<int,int>> path;
 
@@ -135,7 +135,7 @@ void floodfill(Maze &ma){
     path = solve(start, end, maze);
 
     if(path.top() == end){
-        ma.setSolved(true);
+        ma->setSolved(true);
         std::cout << "---Maze is solved!---\n";
     } else {
         std::cout << "-Maze is not solved!-\n";
@@ -145,7 +145,7 @@ void floodfill(Maze &ma){
 
     std::cout << std::endl;
 
-    ma.setPath(maze);
-    ma.printPath();
+    ma->setPath(maze);
+    ma->printPath();
 
 }

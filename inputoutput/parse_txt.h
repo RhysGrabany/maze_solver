@@ -11,6 +11,8 @@ std::vector<std::vector<T>> maze_parse(std::istream& stream, std::vector<std::ve
 
 std::pair<int, int> coords_parse(std::string unprse);
 
-void parse(std::istream& stream, Maze& maze);
+std::vector<std::pair<int,int>> find_coord(std::vector<std::vector<char>> maze);
+
+void parse(std::istream& stream, Maze *maze);
 
 #endif

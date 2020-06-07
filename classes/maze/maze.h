@@ -15,14 +15,15 @@
 class Maze{
 
     private: // private values that must be changed through setters
-        std::vector<std::vector<char>> mzp, path;
-        std::pair<int, int> start, end;
-        bool solved = false;
+        std::vector<std::vector<char>> m_Maze, m_Path;
+        std::pair<int, int> m_Start, m_End;
+        bool m_Solved = false;
 
     public: // public methods: constructors, destructor, getters and setters
         Maze();
         Maze(std::vector<std::vector<char>> mz, std::pair<int, int> s_coords, std::pair<int, int> e__coords);
-        Maze(std::vector<std::vector<char>> mz, std::pair<int, int> s_coords, std::pair<int, int> e__coords, std::vector<std::vector<char>> pa, bool so);
+        //Maze(std::vector<std::vector<char>> mz, std::pair<int, int> s_coords, std::pair<int, int> e__coords, std::vector<std::vector<char>> pa, bool so);
+        Maze(const Maze &maze);
         ~Maze();
 
         void setMaze(std::vector<std::vector<char>> mz);
