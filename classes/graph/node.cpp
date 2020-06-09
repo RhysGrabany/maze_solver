@@ -1,6 +1,3 @@
-
-
-
 #include "node.h"
 #include <utility>
 

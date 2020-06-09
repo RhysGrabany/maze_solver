@@ -8,7 +8,7 @@
 //////////////////
 // Constructors //
 //////////////////
-Maze::Maze(){};
+Maze::Maze(){}
 
 Maze::Maze(std::vector<std::vector<char>> mz, std::pair<int, int> s_coords, std::pair<int, int> e__coords){
     m_Maze = mz;

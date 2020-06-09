@@ -17,7 +17,7 @@ bool isPath(char maze, bool visited){
     return false;
 }
 
-std::vector<Node> node_list(std::vector<std::vector<char>> maze){
+std::vector<Node*> node_list(std::vector<std::vector<char>> maze){
 
     std::vector<Node*> nodes;
     std::vector<std::vector<bool>> visited(maze.size(), std::vector<bool>(maze[0].size(), false));
@@ -27,36 +27,43 @@ std::vector<Node> node_list(std::vector<std::vector<char>> maze){
     for(int i = 0; i < maze.size(); i++){
         for(int j = 0; j < maze[i].size(); j++){
 
-            // WALL PATH WALL
-            if((maze[i][j] == '#') && (isPath(maze[i][j+1], visited[i][j+1]))){
-                Node* node = new Node(id, std::make_pair(j+1, i));
+            if(maze[i][j] == ' '){
+
+                Node *node = new Node(id, std::make_pair(j, i));
                 nodes.push_back(node);
-                visited[i][j+1] = true;
                 id++;
                 delete node;
+
+
+
+
+
+
+
                 continue;
+
             }
-            
-
-
-
-
-
-
 
         }
     }
 
+    return nodes;
+
 
 }
 
-void depthfirst(Maze &ma){
+void depthfirst(Maze *ma){
 
-    std::vector<std::vector<char>> maze = ma.getMaze();
+    std::vector<std::vector<char>> maze = ma->getMaze();
 
-    Graph graph;
+    Graph *graph = new Graph;
 
-    std::vector<Node> nodes = node_list(maze);
+    std::vector<Node*> nodes = node_list(maze);
+    graph->setNodes(nodes);
+
+    std::cout << nodes.size();
+
+    delete graph;
 
 
 

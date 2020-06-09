@@ -9,8 +9,8 @@
 
 std::vector<std::vector<int>> adj_list();
 
-std::vector<Node> node_list(std::vector<std::vector<char>> maze);
+std::vector<Node*> node_list(std::vector<std::vector<char>> maze);
 
-void depthfirst(Maze &ma);
+void depthfirst(Maze *ma);
 
 #endif

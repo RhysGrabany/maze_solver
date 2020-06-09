@@ -9,6 +9,7 @@
 #include "algorithms/lefthand/lefthand.h"
 #include "algorithms/righthand/righthand.h"
 #include "algorithms/floodfill/floodfill.h"
+#include "algorithms/depthfirst/depthfirst.h"
 
 int menu(bool first){
     int choice;
@@ -36,8 +37,8 @@ int main(){
     std::ifstream in;
     std::string loc;
 
-    std::cout << "Load a text file: \n";
-    std::cin >> loc;
+    //std::cout << "Load a text file: \n";
+    //std::cin >> loc;
     loc = "mazes/example2.txt";
 
     in.open(loc);
@@ -49,12 +50,14 @@ int main(){
 
     int choice;
 
-    choice = menu(true);
+    /*choice = menu(true);
     switch(choice) {
         case 1 : lefthand(maze); break;
         case 2 : righthand(maze); break;
         case 3 : floodfill(maze); break;
-    }
+    }*/
+
+    depthfirst(maze);
 
 
     choice = menu(false);
