@@ -39,32 +39,39 @@ int main(){
 
     //std::cout << "Load a text file: \n";
     //std::cin >> loc;
-    loc = "mazes/example2.txt";
-
-    in.open(loc);
+    loc = "mazes/test.txt";
 
     Maze* maze = new Maze;
 
+    in.open(loc);
     parse(in, maze);
     in.close();
 
+    maze->printMaze();
+
     int choice;
 
-    /*choice = menu(true);
-    switch(choice) {
-        case 1 : lefthand(maze); break;
-        case 2 : righthand(maze); break;
-        case 3 : floodfill(maze); break;
-    }*/
+    std::string save = "";
 
-    depthfirst(maze);
+    choice = menu(true);
+    switch(choice) {
+        case 1 : lefthand(maze); save += "lefthand"; break;
+        case 2 : righthand(maze); save += "righthand"; break;
+        case 3 : floodfill(maze); save += "floodfill"; break;
+    }
+
+    //depthfirst(maze);
+
+    save += (maze->getSolved()) ? "Solved.txt" : "NotSolved.txt";
+
+    std::cout << save;
 
 
     choice = menu(false);
     std::vector<std::vector<char>> path = maze->getPath();
 
     switch(choice){
-        case 1 : out(path); break;
+        case 1 : out(path, save); break;
         case 2 : break; 
     }
 

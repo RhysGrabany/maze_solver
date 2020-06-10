@@ -66,6 +66,7 @@ std::stack<std::pair<int,int>> solve(std::pair<int, int> pos, std::pair<int, int
         std::stack<std::pair<int,int>> junctions;
 
         while(pos != end){
+            
             int juncs = junction(pos, maze, visited);
 
             if(juncs > 1){
@@ -103,21 +104,18 @@ std::stack<std::pair<int,int>> solve(std::pair<int, int> pos, std::pair<int, int
                 visited[yp][xp-1] = true;
                 path.push(std::make_pair(xp-1, yp));
                 continue;
+            }
+
+            if(junctions.empty()){
+                return path;
             } else {
 
-                if(junctions.empty()){
-                    return path;
-                } else {
-
-                    pos = junctions.top();
-                    path = path_del(path, junctions);
-                    junctions.pop();
-                }
+                pos = junctions.top();
+                path = path_del(path, junctions);
+                junctions.pop();
             }
         }
-
         return path;
-
 }
 
 

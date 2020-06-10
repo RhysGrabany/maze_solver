@@ -10,13 +10,7 @@
 
 
 
-/*  
-    in: stream std::vector<std::vector<char>>
-    out: std::vector<std::vector<char>>
-    parsing the maze data into a 2d vector
-    takes line in from stream and adds it to a 2d vector
-    returns a parsed 2d vector
-*/
+
 std::vector<std::vector<char>> maze_parse(std::istream& stream, std::vector<std::vector<char>> maze){
 
     std::string test;
@@ -36,37 +30,31 @@ std::vector<std::vector<char>> maze_parse(std::istream& stream, std::vector<std:
     return maze;
 }
 
+
 /*
-    in: string
-    out: std::pair<int, int>
-    method for parsing the coords into an int pair
-    accepts a string and returns a pair with two ints for the coords
+    This is sort of confusing due to how the data is used in the algos but-
+    The start and end coord format when being parsed is as so (x,y) or (column, row)
+    (0,0) is top left
+    The reasoning is because moving right and left should affect the x-axis so it goes first
+    but when looping through a vector it is the second variable so it is like (y,x)
+    DO NOT MIX THESE UP
 */
-std::pair<int, int> coords_parse(std::string unprse){
-
-    boost::remove_erase_if(unprse, boost::is_any_of("()"));
-    
-    std::vector<std::string> str;
-    boost::split(str, unprse, boost::is_any_of(","));
-
-    return std::make_pair(std::stoi(str[0]), std::stoi(str[1]));
-
-}
-
-
 std::vector<std::pair<int,int>> find_coord(std::vector<std::vector<char>> maze){
 
     std::vector<std::pair<int, int>> coords;
 
-    for(int i = 0; i < maze.size(); i++){
-        for(int j = 0; j < maze[i].size(); j++){
-            if(maze[i][j] == ' '){
-                coords.push_back(std::make_pair(j, i));
-                i = maze.size()-1;
-            }
+    std::vector<char>::iterator it;
 
-        }
-    }
+    it = std::find(maze[0].begin(), maze[0].end(), ' ');
+
+    long first = it - maze[0].begin();
+    coords.push_back(std::make_pair(first, 0));
+
+    it = std::find(maze[maze.size()-1].begin(), maze[maze.size()-1].end(), ' ');
+    
+    long sec = it - maze[maze.size()-1].begin();
+    coords.push_back(std::make_pair(sec, maze.size()-1));
+
 
     return coords;
 

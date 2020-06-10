@@ -17,10 +17,10 @@ void makeFolder(){
 
 }
 
-void writeTo(std::vector<std::vector<char>> maze_path){
+void writeTo(std::vector<std::vector<char>> maze_path, std::string save){
 
     std::ofstream outfile;
-    outfile.open("outputs/output.txt");
+    outfile.open("outputs/" + save);
 
 
     for(int i = 0; i < maze_path.size(); i++){
@@ -34,10 +34,10 @@ void writeTo(std::vector<std::vector<char>> maze_path){
 
 }
 
-void out(std::vector<std::vector<char>> maze_path){
+void out(std::vector<std::vector<char>> maze_path, std::string save){
 
     makeFolder();
-    writeTo(maze_path);
+    writeTo(maze_path, save);
 
 
 }

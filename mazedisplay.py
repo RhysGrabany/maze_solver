@@ -21,6 +21,10 @@ class Maze:
         self.m_Text = text
     def setImage(self, image):
         self.m_Image = image
+    def setWidth(self, width):
+        self.m_Width = width
+    def setHeight(self, height):
+        self.m_Height = height
     
     ###########
     # Getters #
@@ -29,6 +33,10 @@ class Maze:
         return self.m_Text
     def getImage(self):
         return self.m_Image
+    def getWidth(self):
+        return self.m_Width
+    def getHeight(self):
+        return self.m_Height
 
     ###########
     # Methods #
@@ -51,7 +59,6 @@ def createImage(maze):
 
     im = Image.new("RGB", (len(txt), len(txt[0])), "#000000")
     pixels = im.load()
-
 
     for i in range(0,len(txt)):
         for j in range(0 ,len(txt[i])):
@@ -87,7 +94,7 @@ def parseText(maze):
 
 def parseImage(maze):
 
-    im = Image.open("outImage.png")
+    im = Image.open("outputs/images/notSolved.jpg")
 
     rotated = im.transpose(Image.ROTATE_270)
     flip = ImageOps.mirror(rotated)
@@ -95,34 +102,49 @@ def parseImage(maze):
     txt = []
 
     pix = flip.load()
-    width, height = flip.size
-    print(width, height)
-    for x in range(0, width):
+    height, width = flip.size
+
+    for x in range(0, height):
         line = []
-        for y in range(0, height):
-            print(x, y)
-            if pix[x, y] == (0, 0, 0):
+        for y in range(0, width):
+            if pix[x, y] >= (0, 0, 0) and pix[x,y] <= (20,20,20):
                 line.append("#")
-            elif pix[x, y] == (255, 255, 255):
+            elif pix[x, y] >= (230, 230, 230) and pix[x,y] <= (255, 255, 255):
                 line.append(" ")
             elif pix[x, y] == (49, 201, 1):
                 line.append("*")
         txt.append(line)
-    
+
+
+    maze.setHeight(height)
+    maze.setWidth(width)
+
     maze.setText(txt)
 
 
+def saveText(maze):
+    saving = maze.getText()
+    
+    height = maze.getHeight()
+    width = maze.getWidth()
 
+    with open("test.txt", 'w') as f:
+        f.write(str(width) + "\n" + str(height) + "\n")
+        for ele in saving:
+            for i in ele:
+                f.write(i)
+            f.write("\n")
 
 def main():
 
     maze = Maze()
 
-    parseImage(maze)
-    maze.printText()
-    #parseText(maze)
-    #createImage(maze)
-    #maze.saveImage()
+    #parseImage(maze)
+    #maze.printText()
+    #saveText(maze)
+    parseText(maze)
+    createImage(maze)
+    maze.saveImage()
 
 
 if __name__ == "__main__":
