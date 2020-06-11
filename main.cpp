@@ -37,10 +37,10 @@ int main(){
     std::ifstream in;
     std::string loc;
 
-    //std::cout << "Load a text file: \n";
-    //std::cin >> loc;
-    loc = "mazes/test.txt";
+    std::cout << "Load a text file: \n";
+    std::cin >> loc;
 
+    
     Maze* maze = new Maze;
 
     in.open(loc);
@@ -63,9 +63,6 @@ int main(){
     //depthfirst(maze);
 
     save += (maze->getSolved()) ? "Solved.txt" : "NotSolved.txt";
-
-    std::cout << save;
-
 
     choice = menu(false);
     std::vector<std::vector<char>> path = maze->getPath();

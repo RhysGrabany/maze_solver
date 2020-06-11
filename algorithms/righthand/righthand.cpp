@@ -121,15 +121,15 @@ void righthand(Maze *ma){
 
     maze = solve_recurR(start, end, maze);
 
+    ma->setPath(maze);
+    ma->printPath();
+    
     if(maze[end.second][end.first] == '*'){
         ma->setSolved(true);
         std::cout << "---Maze is solved!---\n";
     } else {
         std::cout << "-Maze is not solved!-\n";
     }
-
-    ma->setPath(maze);
-    ma->printPath();
 
 }
 

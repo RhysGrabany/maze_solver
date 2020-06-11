@@ -129,8 +129,11 @@ void floodfill(Maze *ma){
 
     std::stack<std::pair<int,int>> path;
 
-
     path = solve(start, end, maze);
+    maze = plot_maze(maze, path);
+
+    ma->setPath(maze);
+    ma->printPath();
 
     if(path.top() == end){
         ma->setSolved(true);
@@ -138,12 +141,5 @@ void floodfill(Maze *ma){
     } else {
         std::cout << "-Maze is not solved!-\n";
     }
-
-    maze = plot_maze(maze, path);
-
-    std::cout << std::endl;
-
-    ma->setPath(maze);
-    ma->printPath();
 
 }

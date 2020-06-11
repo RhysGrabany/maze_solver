@@ -1,5 +1,11 @@
 #!/usr/bin/python3
 from PIL import Image, ImageOps
+import argparse
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-i", "--input")
+parser.add_argument("-o", "--output")
 
 """
     Maze class
@@ -25,6 +31,8 @@ class Maze:
         self.m_Width = width
     def setHeight(self, height):
         self.m_Height = height
+    def setPathColour(self, colour):
+        self.m_PathColour = colour
     
     ###########
     # Getters #
@@ -37,6 +45,8 @@ class Maze:
         return self.m_Width
     def getHeight(self):
         return self.m_Height
+    def getPathColour(self):
+        return self.m_PathColour
 
     ###########
     # Methods #
@@ -47,8 +57,23 @@ class Maze:
         for i in self.m_Text:
             print("".join(i))
     #Method used to save the image to file
-    def saveImage(self):
-        self.m_Image.save("outImage.png")
+    def saveImage(self, outname):
+        self.m_Image.save("outputs/images/" + outname + ".png")
+    #Method used to save text to file
+    def saveText(self, outname):
+        saving = self.getText()
+        
+        height = self.getHeight()
+        width = self.getWidth()
+
+        out = "outputs/text/" + outname + ".txt"
+
+        with open(out, 'w') as f:
+            f.write(str(width) + "\n" + str(height) + "\n")
+            for ele in saving:
+                for i in ele:
+                    f.write(i)
+                f.write("\n")
 
 """
     This method aims to create an image using a textfile input
@@ -67,7 +92,7 @@ def createImage(maze):
             elif txt[i][j] == " ":
                 pixels[i, j] = (255, 255, 255)
             elif txt[i][j] == "*":
-                pixels[i, j] = (49, 201, 1)
+                pixels[i, j] = maze.getPathColour()
 
     # For some reason, done normally the image is flipped and rotated, this makes it rightside up
     rotated = im.transpose(Image.ROTATE_270)
@@ -78,9 +103,9 @@ def createImage(maze):
 """
     This method aims to parse text from a textfile and store it into the maze object
 """
-def parseText(maze):
+def parseText(maze, loc):
 
-    txt = open("outputs/output.txt")
+    txt = open(loc)
 
     mz = []
     for line in txt.readlines():
@@ -92,9 +117,9 @@ def parseText(maze):
     maze.setText(mz)
 
 
-def parseImage(maze):
+def parseImage(maze, loc):
 
-    im = Image.open("outputs/images/notSolved.jpg")
+    im = Image.open(loc)
 
     rotated = im.transpose(Image.ROTATE_270)
     flip = ImageOps.mirror(rotated)
@@ -122,29 +147,27 @@ def parseImage(maze):
     maze.setText(txt)
 
 
-def saveText(maze):
-    saving = maze.getText()
-    
-    height = maze.getHeight()
-    width = maze.getWidth()
-
-    with open("test.txt", 'w') as f:
-        f.write(str(width) + "\n" + str(height) + "\n")
-        for ele in saving:
-            for i in ele:
-                f.write(i)
-            f.write("\n")
-
 def main():
 
     maze = Maze()
 
-    #parseImage(maze)
-    #maze.printText()
-    #saveText(maze)
-    parseText(maze)
-    createImage(maze)
-    maze.saveImage()
+    parsed = parser.parse_args()
+
+    inp = parsed.input
+    outp = parsed.output
+
+    greenpath = (49, 201, 1)
+    redpath = (255, 0, 0)
+    path = redpath if ("NotSolved" in inp) else greenpath
+    maze.setPathColour(path)
+
+    if(".txt" in parsed.input):
+        parseText(maze, inp)
+        createImage(maze)
+        maze.saveImage(outp)
+    else:
+        parseImage(maze, inp)
+        maze.saveText(outp)
 
 
 if __name__ == "__main__":
