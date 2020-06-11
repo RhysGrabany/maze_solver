@@ -32,24 +32,21 @@ std::vector<std::vector<char>> solve_recurR(std::pair<int, int> pos, std::pair<i
             maze[yp][xp] = '*';
         } 
 
-        if((xp-1 > 0) && (maze[yp][xp-1] == ' ')) {
-            pos.first -= 1;
-            maze[yp][xp-1] = '*';
+        if((xp+1 < maze[yp].size()) && (maze[yp][xp+1] == ' ')) {
+            pos.first += 1;
+            maze[yp][xp+1] = '*';
             maze = solve_recurR(pos, end, maze);
-
         } else if((yp+1 < maze.size()) && (maze[yp+1][xp] == ' ')) {
             pos.second += 1;
             maze[yp+1][xp] = '*';
             maze = solve_recurR(pos, end, maze);
-        
         } else if((yp-1 > 0) && (maze[yp-1][xp] == ' ')) {
             pos.second -= 1;
             maze[yp-1][xp] = '*';
             maze = solve_recurR(pos, end, maze);
-        
-        } else if((xp+1 < maze[yp].size()) && (maze[yp][xp+1] == ' ')) {
-            pos.first += 1;
-            maze[yp][xp+1] = '*';
+        } else if((xp-1 > 0) && (maze[yp][xp-1] == ' ')) {
+            pos.first -= 1;
+            maze[yp][xp-1] = '*';
             maze = solve_recurR(pos, end, maze);
         }
 
