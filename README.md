@@ -42,3 +42,10 @@ This is just to make it sort of easier to allocate space for the 2d vector that 
 ---
 
 [This is a good website to generate mazes with these rules.](https://hereandabove.com/maze/mazeorig.form.html) However they also come with a white border that will need to be cropped out. This is a good resource to use until my own is developed. And the files are saved as gif and will need to be converted to jpg before my python file is able to parse it into text.
+
+---
+### Footnote
+
+This was my first program in C++ coming from a pure Python background and as such, some of the choices I make regarding program structure and technologies used can probably be questionable if seen by a more experienced C++ programmer.
+
+Hopefully I can use this program as a learning experience in the future, but I enjoyed working with the language and I look forward to what I can try to make in the future.
